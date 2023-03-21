@@ -2,124 +2,52 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Matrix {
-    int[][] matrix;
-    int rows, cols;
+    int[][] matrix; // biến matrix đại diện cho mảng 2 chiều
+    int rows; // đại diện cho số lượng hàng
+    int cols; // đại diện cho số lượng
 
-    public void initMatrix() {
-        Scanner sc = new Scanner(System.in);
-        Random rd = new Random();
-        System.out.println("Enter cols: ");
-        cols = sc.nextInt();
-        System.out.println("Enter rows: ");
-        rows = sc.nextInt();
-        matrix = new int[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                matrix[i][j] = rd.nextInt(cols * rows) + 1;
+    /**
+     * hàm này có chức năng khởi tạo mảng
+     * và sinh số ngẫu nhiên cho các phần từ của mảng 2 chiều
+     */
+    public void inputMatrix(){
+        Scanner scanner = new Scanner(System.in); // khởi tạo đối tượng Scanner
+        Random random = new Random(1);// khởi tạo đối tượng Random với mỏ neo là 1
+        System.out.println("Nhập số lượng hàng: ");
+        rows = scanner.nextInt(); // nhập số lượng hàng
+        System.out.println("Nhập số lượng cột: ");
+        cols = scanner.nextInt(); // nhập số lượng cột
+        matrix = new int[rows][cols]; // khởi tạo mảng 2 chiều với rows hàng và cols cột
+        for(int row = 0; row < rows; row++){
+            for (int col = 0; col < cols; col++) {
+                System.out.format("Vị trí hàng là %d, vị trí cột là %d\n", row, col);
+                matrix[row][col] = random.nextInt(rows * cols) + 1;
             }
         }
     }
 
-    public void outputMatrix() {
-        for (int i = 0; i < matrix.length; i++) {
-            for (int j = 0; j < matrix[0].length; j++) {
-                System.out.format("%d\t", matrix[i][j]);
-            }
-            System.out.println();
-        }
+    /**
+     * hàm này tìm và in giá trị của phần tử cần tìm
+     */
+    public void find(){
+        Scanner scanner = new Scanner(System.in); // khởi tạo đối tượng Scanner
+        System.out.println("Nhập vị trí hàng: ");
+        int row = scanner.nextInt(); // nhập vị hàng cần tìm
+        System.out.println("Nhập vị trí cột: ");
+        int col = scanner.nextInt(); // nhập vị trí cột cần tìm
+        System.out.format("Giá trị của phần tử tại vị trí hàng %d cột %d là %d", row, col, matrix[row][col]); // in
     }
 
-    public void maxLine() {
-        for (int i = 0; i < rows; i++) {
-            int max = matrix[i][0];
-            for (int j = 1; j < cols; j++) {
-                if (max < matrix[i][j]) {
-                    max = matrix[i][j];
-                }
-            }
-            System.out.format("Max line %d: %d\n", i + 1, max);
-        }
-    }
-
-    public void flipHorizontal() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols / 2; j++) {
-                swapMatrix(matrix, i, j);
+    public void outputMatrix(){
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                System.out.format("%d\t", matrix[row][col]);
             }
         }
-        outputMatrix();
-    }
-
-    private void swapMatrix(int[][] matrix, int i, int j) {
-        int temp = matrix[i][j];
-        matrix[i][j] = matrix[i][matrix[i].length - j - 1];
-        matrix[i][matrix[i].length - j - 1] = temp;
-    }
-
-    public void avgCol() {
-        for (int i = 0; i < cols; i++) {
-            int sum = 0;
-            int count = 0;
-            for (int j = 0; j < rows; j++) {
-                if (isOdd(matrix[j][i])) {
-                    sum += matrix[j][i];
-                    count++;
-                }
-            }
-            float avg = (float) sum / count;
-            System.out.format("Average of column %d: %.2f\n", i + 1, avg);
-        }
-    }
-
-    private boolean isOdd(int matrix) {
-        return matrix % 2 == 1;
-    }
-
-    public void rotateMatrix(){
-        int[][] rotateMatrix = new int[cols][rows];
-        for (int row = 0; row < rotateMatrix.length ; row++) {
-            for (int col = rotateMatrix[0].length - 1; col >= 0 ; col--) {
-                rotateMatrix[row][col] = matrix[rows - col - 1][row];
-            }
-        }
-        matrix = rotateMatrix;
-        outputMatrix();
-    }
-
-    public void rotateMatrix(int[][] matrix) {
-        int m = matrix.length;
-        int n = matrix[0].length;
-        int layers = Math.min(m, n) / 2;
-        for (int layer = 0; layer < layers; layer++) {
-            int first = layer;
-            int last = (n - 1) - layer;
-
-            for (int i = first; i < last; i++) {
-                int offset = i - first;
-
-                // Lưu trữ các giá trị ở 4 góc của lớp hiện tại
-                int top = matrix[first][i];
-                int right = matrix[i][last];
-                int bottom = matrix[last][last - offset];
-                int left = matrix[last - offset][first];
-
-                // Thực hiện xoay các phần tử trong lớp hiện tại bằng cách sử dụng các biến đã lưu trữ
-                matrix[first][i] = left;
-                matrix[i][last] = top;
-                matrix[last][last - offset] = right;
-                matrix[last - offset][first] = bottom;
-            }
-        }
-        outputMatrix();
     }
 
     public static void main(String[] args) {
-        Matrix matrix = new Matrix();
-        matrix.initMatrix();
-        matrix.outputMatrix();
-        matrix.maxLine();
-        matrix.avgCol();
-        matrix.flipHorizontal();
-        matrix.rotateMatrix();
+        Matrix matrix = new Matrix(); // khởi tạo đối tượng Matrix với tên biến là matrix
+        matrix.inputMatrix(); // gọi hàm inputMatrix
     }
 }
