@@ -1,4 +1,4 @@
-package java_core.list;
+package list;
 
 import java.util.Iterator;
 
@@ -184,18 +184,28 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         if (index == 0) {
             head = head.next;
         } else if (index == size - 1) {
-
+            tail = tail.previous;
+            tail.next = null;
         }
-        return null;
+        return result;
     }
 
     @Override
     public Object set(int index, E e) {
         checkIndex(index);
+        E oldValue = get(index);
         if(index == 0){
-
+            head.e = e;
+        }else if (index == size - 1){
+            tail.e = e;
+        }else{
+            Node<E> current = head;
+            for (int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            current.e = e;
         }
-        return null;
+        return oldValue;
     }
 
     @Override

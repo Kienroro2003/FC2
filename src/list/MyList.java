@@ -1,4 +1,4 @@
-package java_core.list;
+package list;
 
 public interface MyList<E> extends Iterable<E> {
     void add(E e);

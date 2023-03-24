@@ -1,4 +1,4 @@
-package java_core.list;
+package list;
 
 public abstract class MyAbstractList<E> implements MyList<E>{
     protected int size = 0;
