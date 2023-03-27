@@ -36,13 +36,15 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 
     public void addLast(E e) {
         Node<E> node = new Node<>(e);
-        tail.next = node;
-        node.previous = tail;
-        tail = node;
 //        System.out.println("Next: " + tail.e);
 //        System.out.println("Previous: " + tail.previous.e);
         if (head == null) {
+            tail = node;
             head = tail;
+        }else{
+            tail.next = node;
+            node.previous = tail;
+            tail = node;
         }
         size++;
     }
@@ -186,7 +188,14 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         } else if (index == size - 1) {
             tail = tail.previous;
             tail.next = null;
+        }else{
+            Node temp = head;
+            for (int i = 0; i < index - 1; i++) {
+                temp = temp.next;
+            }
+            temp.next = temp.next.next;
         }
+        size--;
         return result;
     }
 
@@ -212,6 +221,49 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     public int size() {
         return size;
     }
+
+    @Override
+    public void reverseList() {
+
+    }
+
+    @Override
+    public boolean incrementList() {
+        return false;
+    }
+
+    @Override
+    public void removeAllOdd() {
+        Node temp = head;
+        for (int i = 0; i < size; i++) {
+            if((int)temp.e % 2 == 1){
+                remove(i);
+                i--;
+            }else{
+                temp = temp.next;
+            }
+        }
+    }
+
+    @Override
+    public void sort() {
+
+    }
+
+    @Override
+    public void insertIncrement() {
+
+    }
+
+    @Override
+    public void findMiddleList() {
+        Node temp = head;
+        for (int i = 0; i < size / 2; i++) {
+            temp = temp.next;
+        }
+        System.out.println(temp.e);
+    }
+
 
     @Override
     public String toString() {

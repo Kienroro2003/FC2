@@ -27,4 +27,16 @@ public interface MyList<E> extends Iterable<E> {
 
     int size();
 
+    void reverseList();
+
+    boolean incrementList();
+
+    void removeAllOdd();
+
+    void sort();
+
+    void insertIncrement();
+
+    void findMiddleList();
+
 }

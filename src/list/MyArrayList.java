@@ -98,6 +98,36 @@ public class MyArrayList<E> extends MyAbstractList<E> {
         return size;
     }
 
+    @Override
+    public void reverseList() {
+
+    }
+
+    @Override
+    public boolean incrementList() {
+        return false;
+    }
+
+    @Override
+    public void removeAllOdd() {
+
+    }
+
+    @Override
+    public void sort() {
+
+    }
+
+    @Override
+    public void insertIncrement() {
+
+    }
+
+    @Override
+    public void findMiddleList() {
+
+    }
+
     public void trimToSize(){
         if(size != data.length){
             E[] newDate = (E[]) new Object[size];
