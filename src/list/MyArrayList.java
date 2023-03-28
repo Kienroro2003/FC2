@@ -108,6 +108,7 @@ public class MyArrayList<E> extends MyAbstractList<E> {
         return false;
     }
 
+
     @Override
     public void removeAllOdd() {
 
@@ -119,9 +120,10 @@ public class MyArrayList<E> extends MyAbstractList<E> {
     }
 
     @Override
-    public void insertIncrement() {
+    public void insertIncrement(E e) {
 
     }
+
 
     @Override
     public void findMiddleList() {

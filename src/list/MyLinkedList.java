@@ -1,6 +1,7 @@
 package list;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class MyLinkedList<E> extends MyAbstractList<E> {
     private class Node<E> {
@@ -10,6 +11,12 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 
         public Node(E e) {
             this.e = e;
+        }
+
+        public Node(E e, Node<E> next, Node<E> previous) {
+            this.e = e;
+            this.next = next;
+            this.previous = previous;
         }
 
         @Override
@@ -41,7 +48,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         if (head == null) {
             tail = node;
             head = tail;
-        }else{
+        } else {
             tail.next = node;
             node.previous = tail;
             tail = node;
@@ -118,11 +125,11 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     @Override
     public boolean contains(E e) {
         Node<E> current = head;
-        if(get(0).equals(e)){
+        if (get(0).equals(e)) {
             return true;
-        }else if(get(size-1).equals(e)){
+        } else if (get(size - 1).equals(e)) {
             return true;
-        }else {
+        } else {
             for (int i = 1; i < size - 2; i++) {
                 if (current.e.equals(e)) {
                     return true;
@@ -159,7 +166,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     public int indexOf(E e, int from) {
         Node<E> node = head;
         for (int i = from; i < size - 1; i++) {
-            if(node.e.equals(e)){
+            if (node.e.equals(e)) {
                 return i;
             }
             node = node.next;
@@ -170,8 +177,8 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     @Override
     public int lastIndexOf(E e) {
         Node<E> node = tail;
-        for (int i = size - 1 ; i >= 0 ; i--){
-            if(node.e.equals(e)){
+        for (int i = size - 1; i >= 0; i--) {
+            if (node.e.equals(e)) {
                 return i;
             }
             node = node.previous;
@@ -188,7 +195,7 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
         } else if (index == size - 1) {
             tail = tail.previous;
             tail.next = null;
-        }else{
+        } else {
             Node temp = head;
             for (int i = 0; i < index - 1; i++) {
                 temp = temp.next;
@@ -203,11 +210,11 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     public Object set(int index, E e) {
         checkIndex(index);
         E oldValue = get(index);
-        if(index == 0){
+        if (index == 0) {
             head.e = e;
-        }else if (index == size - 1){
+        } else if (index == size - 1) {
             tail.e = e;
-        }else{
+        } else {
             Node<E> current = head;
             for (int i = 0; i < index; i++) {
                 current = current.next;
@@ -224,22 +231,39 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
 
     @Override
     public void reverseList() {
-
+       Node temp1 = head;
+       Node temp2 = tail;
+        for (int i = 0; i < size / 2; i++) {
+            E value = (E) temp1.e;
+            temp1.e = temp2.e;
+            temp2.e = value;
+            temp1 = temp1.next;
+            temp2 = temp2.previous;
+        }
     }
 
     @Override
     public boolean incrementList() {
-        return false;
+        Node current = head;
+        Node nodeNext = current.next;
+        for (int i = 0; i < size - 1; i++) {
+            if ((int) current.e > (int) nodeNext.e) {
+                return false;
+            }
+            current = nodeNext;
+            nodeNext = nodeNext.next;
+        }
+        return true;
     }
 
     @Override
     public void removeAllOdd() {
         Node temp = head;
         for (int i = 0; i < size; i++) {
-            if((int)temp.e % 2 == 1){
+            if ((int) temp.e % 2 == 1) {
                 remove(i);
                 i--;
-            }else{
+            } else {
                 temp = temp.next;
             }
         }
@@ -251,8 +275,25 @@ public class MyLinkedList<E> extends MyAbstractList<E> {
     }
 
     @Override
-    public void insertIncrement() {
-
+    public void insertIncrement(E e) {
+        Node newNode = new Node(e);
+        if (head == null) {
+            addFirst(e);
+        } else if (!incrementList()) {
+            System.out.println("The list is not incremental");
+        } else {
+            Node temp = head;
+            for (int i = 0; i < size; i++) {
+                if ((int) temp.e > (int) newNode.e) {
+                    Node previous = temp.previous;
+                    previous.next = newNode;
+                    newNode.previous = previous;
+                    newNode.next = temp;
+                    break;
+                }
+                temp = temp.next;
+            }
+        }
     }
 
     @Override

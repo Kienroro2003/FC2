@@ -35,7 +35,7 @@ public interface MyList<E> extends Iterable<E> {
 
     void sort();
 
-    void insertIncrement();
+    void insertIncrement(E e);
 
     void findMiddleList();
 

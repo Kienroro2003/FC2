@@ -8,9 +8,12 @@ public class Main {
        myLinkedList.addLast(1);
        myLinkedList.addLast(3);
        myLinkedList.addLast(7);
-       myLinkedList.addLast(9);
-       myLinkedList.addLast(10);
-       myLinkedList.findMiddleList();
+       myLinkedList.addLast(911);
+       myLinkedList.addLast(100);
+//        System.out.println(myLinkedList.incrementList());
+//        myLinkedList.insertIncrement(99);
+//       myLinkedList.findMiddleList();
+       myLinkedList.reverseList();
         System.out.println(myLinkedList.toString());
     }
 }
