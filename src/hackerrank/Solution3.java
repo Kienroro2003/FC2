@@ -82,10 +82,14 @@ public class Solution3 {
         while (temp1 != temp2){
             if(temp1.next != null){
                 temp1 = temp1.next;
+            }else{
+                temp1 = head2;
             }
 
             if(temp2.next != null){
                 temp2 = temp2.next;
+            }else{
+                temp2 = head1;
             }
         }
 
