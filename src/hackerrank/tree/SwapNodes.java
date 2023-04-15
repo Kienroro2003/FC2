@@ -8,13 +8,19 @@ import java.io.*;
         import java.util.regex.*;
 
 public class SwapNodes {
+    public static List<Integer> inorder(List<List<Integer>> indexes){
+        List<Integer> result = new ArrayList<>();
+
+        return null;
+    }
     public static List<List<Integer>> swapNodes(List<List<Integer>> indexes, List<Integer> queries) {
         // Write your code here
+        List<List<Integer>> result = new ArrayList<>();
         return null;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("src/hackerrank/tree/out"));
 
         int n = Integer.parseInt(bufferedReader.readLine().trim());
 
