@@ -1,4 +1,4 @@
-package hackerrank.trees;
+package hackerrank.tree;
 
 public class BinarySearchTree {
 }

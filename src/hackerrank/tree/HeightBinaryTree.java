@@ -1,23 +1,28 @@
-package hackerrank.trees;
+package hackerrank.tree;
+
+import hackerrank.tree.InorderTraversal;
+import hackerrank.tree.Node;
 
 import java.util.*;
-        import java.io.*;
 
-public class TopView {
+
+public class HeightBinaryTree {
 
     /*
-
     class Node
         int data;
         Node left;
         Node right;
     */
-    public static void topView(Node root) {
-        if(root != null){
-            System.out.print(root.data + " ");
-            topView(root.right);
+    public static int height(Node root) {
+        // Write your code here.
+        if(root == null){
+            return -1;
+        }else{
+            int left = height(root.left);
+            int right = height(root.right);
+            return Math.max(left, right) + 1;
         }
-
     }
 
     public static Node insert(Node root, int data) {
@@ -45,9 +50,8 @@ public class TopView {
             root = insert(root, data);
         }
         scan.close();
-        System.out.print("Display: ");
         InorderTraversal.inOrder(root);
-        System.out.println();
-        topView(root);
+        int height = height(root);
+        System.out.println(height);
     }
 }
