@@ -25,10 +25,10 @@ public class ArrayManipulation {
                 }
             }
         }
-        List<List<Integer>> list =  new ArrayList<>();
+        List<List<Long>> list =  new ArrayList<>();
         for (int i = 0; i < h; i++) {
-            List<Integer> row = Arrays.asList(new Integer[w]);
-            Collections.fill(row, 0);
+            List<Long> row = Arrays.asList(new Long[w]);
+            Collections.fill(row, (long)0);
             list.add(row);
         }
         for (int i = 0; i < queries.size(); i++) {
@@ -36,16 +36,26 @@ public class ArrayManipulation {
             int end = queries.get(i).get(1);
             long value = queries.get(i).get(2);
             for (int j = 0; j < list.size(); j++) {
-                for (int k = 0; k < list.get(j).size(); k++) {
+                for (int k = start - 1; k < end; k++) {
                     if(list.get(j).get(k) != 0){
                         long curValue = list.get(j).get(k);
-
+                        list.get(j).set(k, curValue + value);
+                    }else{
+                        list.get(j).set(k, value);
                     }
                 }
             }
         }
+        long max = list.get(0).get(0);
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.get(i).size(); j++) {
+                if(max < list.get(i).get(j)){
+                    max = list.get(i).get(j);
+                }
+            }
+        }
 
-        return 0;
+        return max;
     }
 
     public static void main(String[] args) throws IOException {
@@ -73,6 +83,7 @@ public class ArrayManipulation {
         });
 
         long result = arrayManipulation(n, queries);
+        System.out.println(result);
 
 //        bufferedWriter.write(String.valueOf(result));
 //        bufferedWriter.newLine();
