@@ -14,48 +14,71 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class ArrayManipulation {
-    public static long arrayManipulation(int n, List<List<Integer>> queries) {
-        // Write your code here
-        int w = 0;
-        int h = queries.size();
-        for (int i = 0; i < queries.size(); i++) {
-            for (int j = 0; j < queries.get(i).size(); j++) {
-                if(queries.get(i).get(j) > w){
-                    w = queries.get(i).get(j);
-                }
-            }
-        }
-        List<List<Long>> list =  new ArrayList<>();
-        for (int i = 0; i < h; i++) {
-            List<Long> row = Arrays.asList(new Long[w]);
-            Collections.fill(row, (long)0);
-            list.add(row);
-        }
-        for (int i = 0; i < queries.size(); i++) {
-            int start = queries.get(i).get(0);
-            int end = queries.get(i).get(1);
-            long value = queries.get(i).get(2);
-            for (int j = 0; j < list.size(); j++) {
-                for (int k = start - 1; k < end; k++) {
-                    if(list.get(j).get(k) != 0){
-                        long curValue = list.get(j).get(k);
-                        list.get(j).set(k, curValue + value);
-                    }else{
-                        list.get(j).set(k, value);
-                    }
-                }
-            }
-        }
-        long max = list.get(0).get(0);
-        for (int i = 0; i < list.size(); i++) {
-            for (int j = 0; j < list.get(i).size(); j++) {
-                if(max < list.get(i).get(j)){
-                    max = list.get(i).get(j);
-                }
-            }
-        }
+//    public static long arrayManipulation(int n, List<List<Integer>> queries) {
+//        // Write your code here
+//        int w = 0;
+//        int h = queries.size();
+//        for (int i = 0; i < queries.size(); i++) {
+//            for (int j = 0; j < queries.get(i).size(); j++) {
+//                if(queries.get(i).get(j) > w){
+//                    w = queries.get(i).get(j);
+//                }
+//            }
+//        }
+//        List<List<Long>> list =  new ArrayList<>();
+//        for (int i = 0; i < h; i++) {
+//            List<Long> row = Arrays.asList(new Long[w]);
+//            Collections.fill(row, (long)0);
+//            list.add(row);
+//        }
+//        for (int i = 0; i < queries.size(); i++) {
+//            int start = queries.get(i).get(0);
+//            int end = queries.get(i).get(1);
+//            long value = queries.get(i).get(2);
+//            for (int j = 0; j < list.size(); j++) {
+//                for (int k = start - 1; k < end; k++) {
+//                    if(list.get(j).get(k) != 0){
+//                        long curValue = list.get(j).get(k);
+//                        list.get(j).set(k, curValue + value);
+//                    }else{
+//                        list.get(j).set(k, value);
+//                    }
+//                }
+//            }
+//        }
+//        long max = list.get(0).get(0);
+//        for (int i = 0; i < list.size(); i++) {
+//            for (int j = 0; j < list.get(i).size(); j++) {
+//                if(max < list.get(i).get(j)){
+//                    max = list.get(i).get(j);
+//                }
+//            }
+//        }
+//
+//        return max;
+//    }
 
-        return max;
+    public static long arrayManipulation(int n, List<List<Integer>> queries) {
+        long[] arr = new long[n];
+
+        for (int i = 0; i < queries.size(); i++) {
+            int start = queries.get(i).get(0) - 1;
+            int end = queries.get(i).get(1) - 1;
+            long value = queries.get(i).get(2);
+            arr[start] += value;
+            if(end + 1 < n){
+                arr[end + 1] -= value;
+            }
+        }
+        long ans = arr[0];
+        long sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+            if(ans < sum){
+                ans = sum;
+            }
+        }
+        return ans;
     }
 
     public static void main(String[] args) throws IOException {
