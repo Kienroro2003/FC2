@@ -40,8 +40,8 @@ public class HeightBinaryTree {
             return root;
         }
     }
-
     public static void main(String[] args) {
+        System.out.println("hello world");
         Scanner scan = new Scanner(System.in);
         int t = scan.nextInt();
         Node root = null;
