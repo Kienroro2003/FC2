@@ -10,7 +10,6 @@ import java.io.*;
 public class SwapNodes {
     public static List<Integer> inorder(List<List<Integer>> indexes){
         List<Integer> result = new ArrayList<>();
-
         return null;
     }
     public static List<List<Integer>> swapNodes(List<List<Integer>> indexes, List<Integer> queries) {
