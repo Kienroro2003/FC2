@@ -5,7 +5,7 @@ import java.util.stream.*;
         import static java.util.stream.Collectors.joining;
         import static java.util.stream.Collectors.toList;
 
-class Result {
+class Result7 {
 
     /*
      * Complete the 'insertionSort1' function below.
@@ -82,9 +82,9 @@ public class InsertionSort {
                 .map(Integer::parseInt)
                 .collect(toList());
 
-        Result.insertionSort2(n, arr);
+        Result7.insertionSort2(n, arr);
 //        System.out.println(arr.toString());
-        Result.display(n, arr);
+        Result7.display(n, arr);
         bufferedReader.close();
     }
 }
