@@ -11,7 +11,7 @@ public class Main {
         Random rd = new Random();
         for(int i = 0 ; i < TOTAL_ELEMENT ; i++){
             A[i] = rd.nextInt(TOTAL_ELEMENT);
-            B[i] = rd.nextInt(TOTAL_ELEMENT);
+            B[i] = A[i];
         }
     }
 
