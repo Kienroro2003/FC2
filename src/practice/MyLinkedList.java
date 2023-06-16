@@ -89,6 +89,7 @@ public class MyLinkedList {
     public int countUniqueElement(){
         Node current = head;
         int res = 0;
+        boolean isEqualTail = false;
         for (int i = 0; i < this.size - 1; i++) {
             Node node = current.next;
             boolean isEqual = false;
@@ -99,12 +100,15 @@ public class MyLinkedList {
                 }
                 node = node.next;
             }
+            if(current.value == tail.value){
+                isEqualTail = true;
+            }
             if(!isEqual){
                 res++;
             }
             current = current.next;
         }
-        return res == 0 ? 0 : res + 1;
+        return isEqualTail ? res : res + 1;
     }
 
     public void changeHeadTail(){
