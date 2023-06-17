@@ -41,6 +41,7 @@ public class Insertion {
         Node root = null;
         while(t-- > 0) {
             int data = scan.nextInt();
+//            System.out.println(insert(root, data).data);
             root = insert(root, data);
         }
         scan.close();
